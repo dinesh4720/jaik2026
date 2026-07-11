@@ -15,6 +15,21 @@ function Mark() {
   return <span className="brand-mark" aria-hidden="true"><i /><i /><i /><i /></span>;
 }
 
+function DitherFlow({ side }: { side: "left" | "right" }) {
+  const rows = [
+    "0  1  ₹  0  1  0  ₹  1",
+    "1  ₹  0  1  0  ₹  1  0",
+    "₹  0  1  0  ₹  1  0  1",
+    "0  1  0  ₹  1  0  1  ₹",
+    "1  0  ₹  1  0  1  ₹  0",
+    "0  ₹  1  0  1  ₹  0  1",
+    "₹  1  0  1  ₹  0  1  0",
+  ];
+  return <div className={`dither-flow dither-${side}`} aria-hidden="true">
+    {rows.map((row, index) => <span key={index}>{row}</span>)}
+  </div>;
+}
+
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [openService, setOpenService] = useState(0);
@@ -44,6 +59,8 @@ export default function Home() {
 
     <main id="top">
       <section className="hero">
+        <DitherFlow side="left" />
+        <DitherFlow side="right" />
         <p className="eyebrow">Chartered accountants · Tirupur</p>
         <h1>Financial clarity for<br /><span>every ambitious business.</span></h1>
         <p className="hero-copy">Dependable audit, tax and advisory services, delivered with integrity and professional excellence.</p>
