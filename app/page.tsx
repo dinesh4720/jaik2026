@@ -17,13 +17,10 @@ function Mark() {
 
 function DitherFlow({ side }: { side: "left" | "right" }) {
   const rows = [
-    "0  1  ₹  0  1  0  ₹  1",
-    "1  ₹  0  1  0  ₹  1  0",
-    "₹  0  1  0  ₹  1  0  1",
-    "0  1  0  ₹  1  0  1  ₹",
-    "1  0  ₹  1  0  1  ₹  0",
-    "0  ₹  1  0  1  ₹  0  1",
-    "₹  1  0  1  ₹  0  1  0",
+    "0  1  ₹  0  1",
+    "1  ₹  0  1  0",
+    "₹  0  1  0  ₹",
+    "0  1  0  ₹  1",
   ];
   return <div className={`dither-flow dither-${side}`} aria-hidden="true">
     {rows.map((row, index) => <span key={index}>{row}</span>)}
@@ -31,40 +28,42 @@ function DitherFlow({ side }: { side: "left" | "right" }) {
 }
 
 const outcomeWords = ["clarity", "freedom", "control", "confidence"];
-const scrambleGlyphs = ["0", "1", "₹"];
 
 function RotatingOutcome() {
-  const [wordIndex, setWordIndex] = useState(0);
-  const [display, setDisplay] = useState(outcomeWords[0]);
-  const [scrambling, setScrambling] = useState(false);
+  const [word, setWord] = useState(outcomeWords[0]);
+  const [transitioning, setTransitioning] = useState(false);
 
   useEffect(() => {
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let currentIndex = 0;
+    let swapTimer = 0;
+    let finishTimer = 0;
     const cycle = window.setInterval(() => {
-      const nextIndex = (wordIndex + 1) % outcomeWords.length;
+      const nextIndex = (currentIndex + 1) % outcomeWords.length;
       if (reducedMotion) {
-        setWordIndex(nextIndex);
-        setDisplay(outcomeWords[nextIndex]);
+        currentIndex = nextIndex;
+        setWord(outcomeWords[currentIndex]);
         return;
       }
 
-      setScrambling(true);
-      let frame = 0;
-      const scramble = window.setInterval(() => {
-        setDisplay(Array.from({ length: 10 }, () => scrambleGlyphs[Math.floor(Math.random() * scrambleGlyphs.length)]).join(""));
-        frame += 1;
-        if (frame >= 9) {
-          window.clearInterval(scramble);
-          setWordIndex(nextIndex);
-          setDisplay(outcomeWords[nextIndex]);
-          setScrambling(false);
-        }
-      }, 48);
-    }, 2600);
-    return () => window.clearInterval(cycle);
-  }, [wordIndex]);
+      setTransitioning(true);
+      swapTimer = window.setTimeout(() => {
+        currentIndex = nextIndex;
+        setWord(outcomeWords[currentIndex]);
+      }, 170);
+      finishTimer = window.setTimeout(() => setTransitioning(false), 460);
+    }, 3000);
+    return () => {
+      window.clearInterval(cycle);
+      window.clearTimeout(swapTimer);
+      window.clearTimeout(finishTimer);
+    };
+  }, []);
 
-  return <span className={`rotating-outcome ${scrambling ? "is-scrambling" : ""}`} aria-hidden="true">{display}</span>;
+  return <span className={`rotating-outcome ${transitioning ? "is-transitioning" : ""}`} aria-hidden="true">
+    <span className="outcome-word" key={word}>{word}</span>
+    <span className="outcome-sweep">01₹</span>
+  </span>;
 }
 
 export default function Home() {
@@ -99,7 +98,7 @@ export default function Home() {
         <DitherFlow side="left" />
         <DitherFlow side="right" />
         <p className="eyebrow">Chartered accountants · Tirupur</p>
-        <h1 aria-label="Financial clarity, freedom, control and confidence for every ambitious business.">Financial <RotatingOutcome /> for<br /><span>every ambitious business.</span></h1>
+        <h1 aria-label="Financial clarity, freedom, control and confidence for every ambitious business."><span className="hero-line">Financial <RotatingOutcome /> for</span><span className="hero-second-line">every ambitious business.</span></h1>
         <p className="hero-copy">Dependable audit, tax and advisory services, delivered with integrity and professional excellence.</p>
         <div className="hero-actions"><a className="button" href="#contact">Talk to an expert <span>↗</span></a><a className="button button-ghost" href="#services">Explore services</a></div>
         <div className="trust-line"><span>One trusted partner for</span><div><b>Tax</b><i /><b>Audit</b><i /><b>Compliance</b><i /><b>Advisory</b></div></div>

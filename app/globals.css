@@ -5,7 +5,7 @@
 /* Binary rupee dither — an ambient financial data stream that converges on the message. */
 .hero{position:relative;overflow:hidden;isolation:isolate}
 .hero>.eyebrow,.hero>h1,.hero>.hero-copy,.hero>.hero-actions,.hero>.trust-line{position:relative;z-index:2}
-.dither-flow{position:absolute;z-index:1;top:145px;width:min(27vw,360px);height:420px;display:flex;flex-direction:column;justify-content:space-around;pointer-events:none;color:var(--ink);opacity:.24;font-family:var(--font-dm-sans),sans-serif;font-size:13px;font-weight:500;line-height:1;letter-spacing:.12em;font-variant-numeric:tabular-nums;overflow:hidden;will-change:transform,opacity}
+.dither-flow{position:absolute;z-index:1;top:240px;width:min(18vw,240px);height:260px;display:flex;flex-direction:column;justify-content:space-around;pointer-events:none;color:var(--ink);opacity:.11;font-family:var(--font-dm-sans),sans-serif;font-size:11px;font-weight:500;line-height:1;letter-spacing:.12em;font-variant-numeric:tabular-nums;overflow:hidden;will-change:transform,opacity}
 .dither-flow span{display:block;width:max-content;white-space:pre;animation:dither-in-left 7s cubic-bezier(.45,0,.55,1) infinite alternate;opacity:.34}
 .dither-flow span:nth-child(2n){animation-duration:8.6s;animation-delay:-3.1s;opacity:.52}
 .dither-flow span:nth-child(3n){animation-duration:6.4s;animation-delay:-4.7s;opacity:.22}
@@ -15,10 +15,41 @@
 .dither-right span{animation-name:dither-in-right}
 @keyframes dither-in-left{from{transform:translateX(-38px)}to{transform:translateX(72px)}}
 @keyframes dither-in-right{from{transform:translateX(38px)}to{transform:translateX(-72px)}}
-@media(max-width:800px){.dither-flow{top:122px;width:25vw;height:340px;font-size:10px;opacity:.14}.dither-left{padding-left:4px}.dither-right{padding-right:4px}}
+@media(max-width:800px){.dither-flow{top:190px;width:18vw;height:220px;font-size:9px;opacity:.07}.dither-left{padding-left:4px}.dither-right{padding-right:4px}}
 @media(prefers-reduced-motion:reduce){.dither-flow span{animation:none}.dither-left span{transform:translateX(16px)}.dither-right span{transform:translateX(-16px)}}
 
-.rotating-outcome{display:inline-block;width:10.25ch;text-align:left;color:var(--ink);white-space:nowrap;font-variant-numeric:tabular-nums;transition:color 160ms cubic-bezier(.2,0,0,1),filter 160ms cubic-bezier(.2,0,0,1),opacity 160ms cubic-bezier(.2,0,0,1);will-change:filter,opacity}
-.rotating-outcome.is-scrambling{color:var(--orange);filter:blur(.35px);opacity:.82;letter-spacing:.015em}
-@media(max-width:800px){.rotating-outcome{width:10.25ch;text-align:center}.hero h1{max-width:100%}}
-@media(prefers-reduced-motion:reduce){.rotating-outcome{transition:none}}
+.hero h1{font-size:clamp(46px,4.8vw,82px);width:100%;text-wrap:balance}
+.hero h1 .hero-line{display:flex;align-items:baseline;justify-content:center;gap:.18em;white-space:nowrap;color:var(--ink)}
+.hero h1 .hero-second-line{display:block;color:#b9b9b5}
+.rotating-outcome{position:relative;display:inline-block;width:8.75ch;text-align:center;color:#b9b9b5;white-space:nowrap;font-variant-numeric:tabular-nums}
+.outcome-word{display:block;animation:outcome-in 280ms cubic-bezier(.2,0,0,1)}
+.hero h1 .outcome-sweep{position:absolute;left:0;top:8%;color:var(--orange);font-size:.38em;font-weight:600;line-height:1;letter-spacing:.08em;opacity:0;filter:blur(4px);transform:translateX(-20%);pointer-events:none}
+.rotating-outcome.is-transitioning .outcome-word{animation:outcome-refresh 460ms cubic-bezier(.2,0,0,1)}
+.rotating-outcome.is-transitioning .outcome-sweep{animation:outcome-sweep 460ms cubic-bezier(.2,0,0,1)}
+@keyframes outcome-in{from{opacity:0;filter:blur(4px);transform:translateY(5px)}to{opacity:1;filter:blur(0);transform:translateY(0)}}
+@keyframes outcome-refresh{0%{opacity:1;filter:blur(0)}36%{opacity:.18;filter:blur(4px)}64%{opacity:.18;filter:blur(4px)}100%{opacity:1;filter:blur(0)}}
+@keyframes outcome-sweep{0%{opacity:0;filter:blur(4px);transform:translateX(-20%)}24%{opacity:1;filter:blur(0);transform:translateX(60%)}76%{opacity:1;filter:blur(0);transform:translateX(500%)}100%{opacity:0;filter:blur(4px);transform:translateX(620%)}}
+@media(max-width:800px){.hero h1{font-size:clamp(31px,8.4vw,48px);max-width:100%}.hero-line{gap:.12em}.rotating-outcome{width:8.75ch}.outcome-sweep{font-size:.42em}}
+@media(prefers-reduced-motion:reduce){.outcome-word,.rotating-outcome.is-transitioning .outcome-word,.rotating-outcome.is-transitioning .outcome-sweep{animation:none}.outcome-sweep{display:none}}
+
+/* Purpose-card motion */
+.purpose-card>span,.purpose-card>h3,.purpose-card>p{position:relative;z-index:2}
+.orbital{animation:vision-orbit 16s linear infinite;will-change:transform}
+.orbital i{animation:vision-pulse 2.8s cubic-bezier(.45,0,.55,1) infinite alternate}
+.orbital i:nth-child(2){animation-delay:-.9s}.orbital i:nth-child(3){animation-delay:-1.8s}
+.rising-lines i{transform-origin:bottom;animation:mission-rise 3.2s cubic-bezier(.45,0,.55,1) infinite alternate;will-change:transform,opacity}
+.rising-lines i:nth-child(2){animation-delay:-.6s}.rising-lines i:nth-child(3){animation-delay:-1.2s}.rising-lines i:nth-child(4){animation-delay:-1.8s}
+@keyframes vision-orbit{to{transform:rotate(360deg)}}
+@keyframes vision-pulse{from{transform:scale(.72);opacity:.48}to{transform:scale(1);opacity:1}}
+@keyframes mission-rise{from{transform:scaleY(.68);opacity:.48}to{transform:scaleY(1);opacity:1}}
+
+@media(max-width:800px){
+  .purpose-card.orange{min-height:560px;padding-bottom:205px}
+  .purpose-card.orange h3{margin-top:42px;font-size:clamp(30px,9vw,38px);text-wrap:balance}
+  .purpose-card.orange p{max-width:30ch;text-wrap:pretty}
+  .purpose-card.orange:after{content:"";position:absolute;z-index:1;left:0;right:0;bottom:0;height:230px;background:linear-gradient(180deg,transparent,rgba(206,50,25,.18));pointer-events:none}
+  .rising-lines{z-index:1;right:-12px;bottom:-12px;width:220px;height:190px;gap:10px;opacity:.88}
+  .rising-lines i{width:40px}
+  .rising-lines i:nth-child(1){height:58px}.rising-lines i:nth-child(2){height:92px}.rising-lines i:nth-child(3){height:132px}.rising-lines i:nth-child(4){height:176px}
+}
+@media(prefers-reduced-motion:reduce){.orbital,.orbital i,.rising-lines i{animation:none}}
