@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 
 const services = [
   ["Taxation services", "Income tax filing for individuals, HUFs and companies; tax planning; TDS compliance; assessments and appeals."],
@@ -28,6 +28,43 @@ function DitherFlow({ side }: { side: "left" | "right" }) {
   return <div className={`dither-flow dither-${side}`} aria-hidden="true">
     {rows.map((row, index) => <span key={index}>{row}</span>)}
   </div>;
+}
+
+const outcomeWords = ["clarity", "freedom", "control", "confidence"];
+const scrambleGlyphs = ["0", "1", "₹"];
+
+function RotatingOutcome() {
+  const [wordIndex, setWordIndex] = useState(0);
+  const [display, setDisplay] = useState(outcomeWords[0]);
+  const [scrambling, setScrambling] = useState(false);
+
+  useEffect(() => {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const cycle = window.setInterval(() => {
+      const nextIndex = (wordIndex + 1) % outcomeWords.length;
+      if (reducedMotion) {
+        setWordIndex(nextIndex);
+        setDisplay(outcomeWords[nextIndex]);
+        return;
+      }
+
+      setScrambling(true);
+      let frame = 0;
+      const scramble = window.setInterval(() => {
+        setDisplay(Array.from({ length: 10 }, () => scrambleGlyphs[Math.floor(Math.random() * scrambleGlyphs.length)]).join(""));
+        frame += 1;
+        if (frame >= 9) {
+          window.clearInterval(scramble);
+          setWordIndex(nextIndex);
+          setDisplay(outcomeWords[nextIndex]);
+          setScrambling(false);
+        }
+      }, 48);
+    }, 2600);
+    return () => window.clearInterval(cycle);
+  }, [wordIndex]);
+
+  return <span className={`rotating-outcome ${scrambling ? "is-scrambling" : ""}`} aria-hidden="true">{display}</span>;
 }
 
 export default function Home() {
@@ -62,7 +99,7 @@ export default function Home() {
         <DitherFlow side="left" />
         <DitherFlow side="right" />
         <p className="eyebrow">Chartered accountants · Tirupur</p>
-        <h1>Financial clarity for<br /><span>every ambitious business.</span></h1>
+        <h1 aria-label="Financial clarity, freedom, control and confidence for every ambitious business.">Financial <RotatingOutcome /> for<br /><span>every ambitious business.</span></h1>
         <p className="hero-copy">Dependable audit, tax and advisory services, delivered with integrity and professional excellence.</p>
         <div className="hero-actions"><a className="button" href="#contact">Talk to an expert <span>↗</span></a><a className="button button-ghost" href="#services">Explore services</a></div>
         <div className="trust-line"><span>One trusted partner for</span><div><b>Tax</b><i /><b>Audit</b><i /><b>Compliance</b><i /><b>Advisory</b></div></div>
