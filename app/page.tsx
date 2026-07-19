@@ -39,7 +39,7 @@ const presenceItems = [
 ];
 
 function Mark() {
-  return <span className="brand-mark" aria-hidden="true"><i /><i /><i /><i /></span>;
+  return <span className="brand-mark" aria-hidden="true">JK</span>;
 }
 
 function ArrowIcon({ direction = "up-right" }: { direction?: "up-right" | "left" | "right" }) {
@@ -165,7 +165,7 @@ export default function Home() {
         <DitherFlow side="left" />
         <DitherFlow side="right" />
         <p className="eyebrow">Chartered accountants · Chennai</p>
-        <h1>Financial <em className="hero-clarity">clarity</em> for<br /><span>every ambitious business.</span></h1>
+        <h1>Financial <em className="hero-clarity">clarity</em> <span className="hero-highlight">forever-y</span> <span className="hero-muted">ambitious business.</span></h1>
         <p className="hero-copy">Dependable audit, tax and advisory services, delivered with integrity and professional excellence.</p>
         <div className="hero-actions"><a className="button" href="#contact">Talk to an expert <ArrowIcon /></a><a className="button button-ghost" href="#services">Explore services</a></div>
         <div className="trust-line"><span>One trusted partner for</span><div><b>Tax</b><i /><b>Audit</b><i /><b>Compliance</b><i /><b>Advisory</b></div></div>
