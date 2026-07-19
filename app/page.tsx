@@ -39,7 +39,7 @@ const presenceItems = [
 ];
 
 function Mark() {
-  return <span className="brand-mark" aria-hidden="true">JK</span>;
+  return <img className="brand-logo" src="/jaik-india-logo.png" alt="" aria-hidden="true" />;
 }
 
 function ArrowIcon({ direction = "up-right" }: { direction?: "up-right" | "left" | "right" }) {
@@ -94,6 +94,11 @@ export default function Home() {
   useEffect(() => {
     if (menuOpen) setNavHidden(false);
   }, [menuOpen]);
+
+  function handleSectionLinkClick() {
+    setMenuOpen(false);
+    setNavHidden(false);
+  }
 
   useEffect(() => {
     const elements = document.querySelectorAll<HTMLElement>("[data-reveal]");
@@ -152,12 +157,12 @@ export default function Home() {
 
   return <>
     <header className={`site-header ${navHidden ? "is-hidden" : ""} ${navElevated ? "is-elevated" : ""}`}>
-      <a className="brand" href="#top"><Mark /><span>Jai K & Associates</span></a>
+      <a className="brand" href="#top" onClick={handleSectionLinkClick}><Mark /><span>Jai K & Associates</span></a>
       <button className="menu-toggle" type="button" aria-label="Open menu" aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}><span /><span /></button>
       <nav className={`nav-links ${menuOpen ? "open" : ""}`} aria-label="Main navigation">
-        {["About", "Services", "Showcase", "Values", "Contact"].map(item => <a key={item} href={`#${item.toLowerCase()}`} onClick={() => setMenuOpen(false)}>{item}</a>)}
+        {["About", "Services", "Showcase", "Values", "Contact"].map(item => <a key={item} href={`#${item.toLowerCase()}`} onClick={handleSectionLinkClick}>{item}</a>)}
       </nav>
-      <a className="button button-small header-cta" href="#contact">Get expert help <ArrowIcon /></a>
+      <a className="button button-small header-cta" href="#contact" onClick={handleSectionLinkClick}>Get expert help <ArrowIcon /></a>
     </header>
 
     <main id="top">
@@ -167,7 +172,7 @@ export default function Home() {
         <p className="eyebrow">Chartered accountants · Chennai</p>
         <h1>Financial <em className="hero-clarity">clarity</em> <span className="hero-highlight">forever-y</span> <span className="hero-muted">ambitious business.</span></h1>
         <p className="hero-copy">Dependable audit, tax and advisory services, delivered with integrity and professional excellence.</p>
-        <div className="hero-actions"><a className="button" href="#contact">Talk to an expert <ArrowIcon /></a><a className="button button-ghost" href="#services">Explore services</a></div>
+        <div className="hero-actions"><a className="button" href="#contact" onClick={handleSectionLinkClick}>Talk to an expert <ArrowIcon /></a><a className="button button-ghost" href="#services" onClick={handleSectionLinkClick}>Explore services</a></div>
         <div className="trust-line"><span>One trusted partner for</span><div><b>Tax</b><i /><b>Audit</b><i /><b>Compliance</b><i /><b>Advisory</b></div></div>
       </section>
 
@@ -186,7 +191,7 @@ export default function Home() {
         <div className="services-head reveal reveal-delay-1" data-reveal><h2>Expertise where<br />it matters most.</h2><p>From everyday compliance to pivotal business decisions, our services are designed around your complete financial journey.</p></div>
         <div className="service-list reveal reveal-delay-2" data-reveal>{services.map(([title, description], index) => <article className={`service-item ${openService === index ? "open" : ""}`} key={title}>
           <button type="button" aria-expanded={openService === index} onClick={() => setOpenService(openService === index ? -1 : index)}><span className="service-number">{String(index + 1).padStart(2, "0")}</span><span className="service-title">{title}</span><span className="service-icon">{openService === index ? "−" : "+"}</span></button>
-          <div className="service-body"><p>{description}</p><a href="#contact">Discuss with us <ArrowIcon /></a></div>
+          <div className="service-body"><p>{description}</p><a href="#contact" onClick={handleSectionLinkClick}>Discuss with us <ArrowIcon /></a></div>
         </article>)}</div>
       </section>
 
@@ -232,6 +237,6 @@ export default function Home() {
         <div className="map-frame reveal reveal-delay-1" data-reveal><iframe title="Jai K & Associates, Choolaimedu" src="https://www.google.com/maps?q=Jai+K+%26+Associates,+South+Gangai+Amman+Koil,+26%2F30,+1st+Cross+St,+Choolaimedu,+Chennai,+Tamil+Nadu+600094&output=embed" loading="lazy" referrerPolicy="no-referrer-when-downgrade" /></div>
       </section>
     </main>
-    <footer><a className="brand footer-brand" href="#top"><Mark /><span>Jai K & Associates</span></a><p>Audit. Tax. Advisory.<br />Clarity at every step.</p><div><a href="#about">About</a><a href="#services">Services</a><a href="#contact">Contact</a></div><small>© {new Date().getFullYear()} Jai K & Associates</small></footer>
+    <footer><a className="brand footer-brand" href="#top" onClick={handleSectionLinkClick}><Mark /><span>Jai K & Associates</span></a><p>Audit. Tax. Advisory.<br />Clarity at every step.</p><div><a href="#about" onClick={handleSectionLinkClick}>About</a><a href="#services" onClick={handleSectionLinkClick}>Services</a><a href="#contact" onClick={handleSectionLinkClick}>Contact</a></div><small>© {new Date().getFullYear()} Jai K & Associates</small></footer>
   </>;
 }
