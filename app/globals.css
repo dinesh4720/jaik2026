@@ -112,6 +112,10 @@
 .brand{font-size:22px}
 @media(max-width:800px){.brand{font-size:18px}}
 
+/* Keep the fixed header composited without translating it during anchor scrolls. */
+.site-header{will-change:auto;transition:none}
+.site-header.is-hidden{transform:none}
+
 /* Keep section labels readable across the full page. */
 .section-label,
 .purpose-card > span,

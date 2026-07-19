@@ -63,23 +63,15 @@ export default function Home() {
   const [openService, setOpenService] = useState(0);
   const [status, setStatus] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [navHidden, setNavHidden] = useState(false);
   const [navElevated, setNavElevated] = useState(false);
   const [activePresence, setActivePresence] = useState(0);
 
   useEffect(() => {
-    let lastY = window.scrollY;
     let frame = 0;
     const onScroll = () => {
       if (frame) return;
       frame = window.requestAnimationFrame(() => {
-        const currentY = window.scrollY;
-        const delta = currentY - lastY;
-        setNavElevated(currentY > 24);
-        if (currentY < 24) setNavHidden(false);
-        else if (delta > 8 && currentY > 96) setNavHidden(true);
-        else if (delta < -4) setNavHidden(false);
-        lastY = currentY;
+        setNavElevated(window.scrollY > 24);
         frame = 0;
       });
     };
@@ -91,13 +83,8 @@ export default function Home() {
     };
   }, []);
 
-  useEffect(() => {
-    if (menuOpen) setNavHidden(false);
-  }, [menuOpen]);
-
   function handleSectionLinkClick() {
     setMenuOpen(false);
-    setNavHidden(false);
   }
 
   useEffect(() => {
@@ -156,7 +143,7 @@ export default function Home() {
   }
 
   return <>
-    <header className={`site-header ${navHidden ? "is-hidden" : ""} ${navElevated ? "is-elevated" : ""}`}>
+    <header className={`site-header ${navElevated ? "is-elevated" : ""}`}>
       <a className="brand" href="#top" onClick={handleSectionLinkClick}><Mark /><span>Jai K & Associates</span></a>
       <button className="menu-toggle" type="button" aria-label="Open menu" aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}><span /><span /></button>
       <nav className={`nav-links ${menuOpen ? "open" : ""}`} aria-label="Main navigation">
