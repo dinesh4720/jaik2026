@@ -131,7 +131,7 @@ export default function Home() {
     formData.append("_template", "table");
 
     try {
-      const response = await fetch("https://formsubmit.co/ajax/jaikandassociates@gmail.com", {
+      const response = await fetch("https://formsubmit.co/ajax/info@jaikassociates.in", {
         method: "POST",
         body: formData,
         headers: { Accept: "application/json" },
@@ -160,7 +160,7 @@ export default function Home() {
       <section className="hero">
         <DitherFlow side="left" />
         <DitherFlow side="right" />
-        <p className="eyebrow">Chartered accountants · Tirupur</p>
+        <p className="eyebrow">Chartered accountants · Chennai</p>
         <h1>Financial <em className="hero-clarity">clarity</em> for<br /><span>every ambitious business.</span></h1>
         <p className="hero-copy">Dependable audit, tax and advisory services, delivered with integrity and professional excellence.</p>
         <div className="hero-actions"><a className="button" href="#contact">Talk to an expert <span>↗</span></a><a className="button button-ghost" href="#services">Explore services</a></div>
@@ -212,7 +212,7 @@ export default function Home() {
       </section>
 
       <section className="contact" id="contact">
-        <div className="contact-intro reveal" data-reveal><div className="section-label light"><span>05</span> Contact us</div><h2>Let&apos;s make your<br />finances feel simple.</h2><p>Tell us what you need. Our team will get back to you with a practical next step.</p><div className="contact-details"><a href="tel:+917550122671">+91 75501 22671</a><a href="mailto:jaikandassociates@gmail.com">jaikandassociates@gmail.com</a><span>Choolaimedu, Chennai, Tamil Nadu</span></div></div>
+        <div className="contact-intro reveal" data-reveal><div className="section-label light"><span>05</span> Contact us</div><h2>Let&apos;s make your<br />finances feel simple.</h2><p>Tell us what you need. Our team will get back to you with a practical next step.</p><div className="contact-details"><a href="tel:+919500622671">+91 95006 22671</a><a href="mailto:info@jaikassociates.in">info@jaikassociates.in</a><span>No. 26/30, Om Sakthi Nilayam,<br />South Gangai Amman Koil 1st Street,<br />Choolaimedu, Chennai - 600094</span></div></div>
         <form className="contact-form reveal reveal-delay-1" data-reveal noValidate onSubmit={submit}>
           <label><span>Your name</span><input name="name" autoComplete="name" placeholder="How should we address you?" required /></label>
           <label><span>Email address</span><input name="email" type="email" autoComplete="email" placeholder="you@company.com" required /></label>
@@ -224,8 +224,8 @@ export default function Home() {
         </form>
       </section>
       <section className="location-map" aria-labelledby="location-heading">
-        <div className="location-copy reveal" data-reveal><p className="location-eyebrow"><span aria-hidden="true">●</span> Chennai office</p><h2 id="location-heading">Visit us when<br />the numbers need<br /><em>attention.</em></h2><address>Jai K &amp; Associates, South Gangai Amman Koil,<br />26/30, 1st Cross St, Choolaimedu, Chennai,<br />Tamil Nadu 600094</address><a className="location-link" href="https://www.google.com/maps/search/?api=1&query=Jai%20K%20%26%20Associates%2C%20South%20Gangai%20Amman%20Koil%2C%2026%2F30%2C%201st%20Cross%20St%2C%20Choolaimedu%2C%20Chennai%2C%20Tamil%20Nadu%20600094" target="_blank" rel="noreferrer">Get directions <span>↗</span></a></div>
-        <div className="map-frame reveal reveal-delay-1" data-reveal><iframe title="Jai K & Associates, Choolaimedu" src="https://www.google.com/maps?q=Jai%20K%20%26%20Associates%2C%20South%20Gangai%20Amman%20Koil%2C%2026%2F30%2C%201st%20Cross%20St%2C%20Choolaimedu%2C%20Chennai%2C%20Tamil%20Nadu%20600094&output=embed" loading="lazy" referrerPolicy="no-referrer-when-downgrade" /></div>
+        <div className="location-copy reveal" data-reveal><p className="location-eyebrow"><span aria-hidden="true">●</span> Chennai office</p><h2 id="location-heading">Visit us when<br />the numbers need<br /><em>attention.</em></h2><address>Jai K &amp; Associates<br />No. 26/30, Om Sakthi Nilayam,<br />South Gangai Amman Koil 1st Street,<br />Choolaimedu, Chennai - 600094</address><a className="location-link" href="https://www.google.com/maps/search/?api=1&query=No.%2026%2F30%2C%20Om%20Sakthi%20Nilayam%2C%20South%20Gangai%20Amman%20Koil%201st%20Street%2C%20Choolaimedu%2C%20Chennai%20-%20600094" target="_blank" rel="noreferrer">Get directions <span>↗</span></a></div>
+        <div className="map-frame reveal reveal-delay-1" data-reveal><iframe title="Jai K & Associates, Choolaimedu" src="https://www.google.com/maps?q=No.%2026%2F30%2C%20Om%20Sakthi%20Nilayam%2C%20South%20Gangai%20Amman%20Koil%201st%20Street%2C%20Choolaimedu%2C%20Chennai%20-%20600094&output=embed" loading="lazy" referrerPolicy="no-referrer-when-downgrade" /></div>
       </section>
     </main>
     <footer><a className="brand footer-brand" href="#top"><Mark /><span>Jai K & Associates</span></a><p>Audit. Tax. Advisory.<br />Clarity at every step.</p><div><a href="#about">About</a><a href="#services">Services</a><a href="#contact">Contact</a></div><small>© {new Date().getFullYear()} Jai K & Associates</small></footer>

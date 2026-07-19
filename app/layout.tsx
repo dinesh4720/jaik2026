@@ -13,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const protocol = requestHeaders.get("x-forwarded-proto") ?? (host.includes("localhost") ? "http" : "https");
   const origin = `${protocol}://${host}`;
   const title = "Jai K & Associates — Chartered Accountants";
-  const description = "Chartered Accountants for tax, audit, compliance and financial advisory services in Tirupur, Tamil Nadu.";
+  const description = "Chartered Accountants for tax, audit, compliance and financial advisory services in Chennai, Tamil Nadu.";
   return {
     title,
     description,
