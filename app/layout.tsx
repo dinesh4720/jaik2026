@@ -13,7 +13,10 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://jaikassociates.in"),
   title,
   description,
-  icons: { icon: "/favicon.svg?v=jk" },
+  icons: {
+    icon: "/favicon.ico?v=1",
+    apple: "/jaik-india-logo.png?v=1",
+  },
   openGraph: { title, description, type: "website", images: [{ url: "/og.png", width: 1200, height: 630 }] },
   twitter: { card: "summary_large_image", title, description, images: ["/og.png"] },
 };

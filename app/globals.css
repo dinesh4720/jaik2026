@@ -98,14 +98,19 @@
 .icon-arrow-left{transform:rotate(180deg)}
 .icon-arrow-up-right{transform:rotate(-45deg)}
 
-/* Simple text monogram in place of the previous flower logo. */
-.brand-mark{display:inline-flex;align-items:center;justify-content:center;width:25px;height:25px;flex:0 0 25px;font-family:var(--font-manrope),sans-serif;font-size:13px;font-weight:800;letter-spacing:-.14em;line-height:1;padding-right:.12em}
+/* Use the firm's supplied mark in the header and footer. */
+.brand-logo{display:block;width:54px;height:42px;flex:0 0 54px;object-fit:contain;object-position:center}
+@media(max-width:800px){.brand-logo{width:48px;height:36px;flex-basis:48px}}
 
 /* Vision and mission graphics stay centered and grounded in their cards. */
 .orbital{animation:none;will-change:auto}
 .purpose-card.orange .rising-lines{right:30px;bottom:0;width:252px;height:220px;gap:12px;transform:none}
 .purpose-card.orange .rising-lines i{width:48px}.purpose-card.orange .rising-lines i:nth-child(1){height:58px}.purpose-card.orange .rising-lines i:nth-child(2){height:105px}.purpose-card.orange .rising-lines i:nth-child(3){height:156px}.purpose-card.orange .rising-lines i:nth-child(4){height:208px}
 @media(max-width:800px){.purpose-card.orange .rising-lines{right:14px;bottom:0;width:212px;height:182px;gap:9px;transform:none}.purpose-card.orange .rising-lines i{width:39px}.purpose-card.orange .rising-lines i:nth-child(1){height:54px}.purpose-card.orange .rising-lines i:nth-child(2){height:88px}.purpose-card.orange .rising-lines i:nth-child(3){height:130px}.purpose-card.orange .rising-lines i:nth-child(4){height:172px}}
+
+/* Give the firm name stronger presence beside the supplied logo. */
+.brand{font-size:22px}
+@media(max-width:800px){.brand{font-size:18px}}
 
 /* Keep section labels readable across the full page. */
 .section-label,
