@@ -42,6 +42,10 @@ function Mark() {
   return <span className="brand-mark" aria-hidden="true"><i /><i /><i /><i /></span>;
 }
 
+function ArrowIcon({ direction = "up-right" }: { direction?: "up-right" | "left" | "right" }) {
+  return <span className={`icon-arrow icon-arrow-${direction}`} aria-hidden="true" />;
+}
+
 function DitherFlow({ side }: { side: "left" | "right" }) {
   const rows = [
     "0  1  ₹  0  1",
@@ -153,7 +157,7 @@ export default function Home() {
       <nav className={`nav-links ${menuOpen ? "open" : ""}`} aria-label="Main navigation">
         {["About", "Services", "Showcase", "Values", "Contact"].map(item => <a key={item} href={`#${item.toLowerCase()}`} onClick={() => setMenuOpen(false)}>{item}</a>)}
       </nav>
-      <a className="button button-small header-cta" href="#contact">Get expert help <span>↗</span></a>
+      <a className="button button-small header-cta" href="#contact">Get expert help <ArrowIcon /></a>
     </header>
 
     <main id="top">
@@ -163,7 +167,7 @@ export default function Home() {
         <p className="eyebrow">Chartered accountants · Chennai</p>
         <h1>Financial <em className="hero-clarity">clarity</em> for<br /><span>every ambitious business.</span></h1>
         <p className="hero-copy">Dependable audit, tax and advisory services, delivered with integrity and professional excellence.</p>
-        <div className="hero-actions"><a className="button" href="#contact">Talk to an expert <span>↗</span></a><a className="button button-ghost" href="#services">Explore services</a></div>
+        <div className="hero-actions"><a className="button" href="#contact">Talk to an expert <ArrowIcon /></a><a className="button button-ghost" href="#services">Explore services</a></div>
         <div className="trust-line"><span>One trusted partner for</span><div><b>Tax</b><i /><b>Audit</b><i /><b>Compliance</b><i /><b>Advisory</b></div></div>
       </section>
 
@@ -182,7 +186,7 @@ export default function Home() {
         <div className="services-head reveal reveal-delay-1" data-reveal><h2>Expertise where<br />it matters most.</h2><p>From everyday compliance to pivotal business decisions, our services are designed around your complete financial journey.</p></div>
         <div className="service-list reveal reveal-delay-2" data-reveal>{services.map(([title, description], index) => <article className={`service-item ${openService === index ? "open" : ""}`} key={title}>
           <button type="button" aria-expanded={openService === index} onClick={() => setOpenService(openService === index ? -1 : index)}><span className="service-number">{String(index + 1).padStart(2, "0")}</span><span className="service-title">{title}</span><span className="service-icon">{openService === index ? "−" : "+"}</span></button>
-          <div className="service-body"><p>{description}</p><a href="#contact">Discuss with us ↗</a></div>
+          <div className="service-body"><p>{description}</p><a href="#contact">Discuss with us <ArrowIcon /></a></div>
         </article>)}</div>
       </section>
 
@@ -197,7 +201,7 @@ export default function Home() {
           <div className="presence-stage" aria-live="polite">
             {presenceItems.map((item, index) => <img key={item.image} className={activePresence === index ? "is-active" : ""} src={item.image} alt={item.alt} loading={index === 0 ? "eager" : "lazy"} />)}
             <div className="presence-overlay"><span>{presenceItems[activePresence].number}</span><p>{presenceItems[activePresence].label}</p></div>
-            <div className="presence-controls"><button type="button" aria-label="Show previous story" onClick={() => setActivePresence((activePresence + presenceItems.length - 1) % presenceItems.length)}>←</button><button type="button" aria-label="Show next story" onClick={() => setActivePresence((activePresence + 1) % presenceItems.length)}>→</button></div>
+            <div className="presence-controls"><button type="button" aria-label="Show previous story" onClick={() => setActivePresence((activePresence + presenceItems.length - 1) % presenceItems.length)}><ArrowIcon direction="left" /></button><button type="button" aria-label="Show next story" onClick={() => setActivePresence((activePresence + 1) % presenceItems.length)}><ArrowIcon direction="right" /></button></div>
           </div>
         </div>
       </section>
@@ -220,11 +224,11 @@ export default function Home() {
           <label><span>How can we help?</span><select name="service">{services.map(([title]) => <option key={title}>{title}</option>)}</select></label>
           <label><span>A few details</span><textarea name="message" rows={3} placeholder="Tell us briefly about your requirement" /></label>
           <input className="form-honeypot" type="text" name="_honey" tabIndex={-1} autoComplete="off" aria-hidden="true" />
-          <button className="button form-submit" type="submit" disabled={isSubmitting}>{isSubmitting ? "Sending enquiry…" : "Send enquiry"} <span>↗</span></button><p className="form-status" role="status">{status}</p>
+          <button className="button form-submit" type="submit" disabled={isSubmitting}>{isSubmitting ? "Sending enquiry…" : "Send enquiry"} <ArrowIcon /></button><p className="form-status" role="status">{status}</p>
         </form>
       </section>
       <section className="location-map" aria-labelledby="location-heading">
-        <div className="location-copy reveal" data-reveal><p className="location-eyebrow"><span aria-hidden="true">●</span> Chennai office</p><h2 id="location-heading">Visit us when<br />the numbers need<br /><em>attention.</em></h2><address>Jai K &amp; Associates<br />No. 26/30, Om Sakthi Nilayam,<br />South Gangai Amman Koil 1st Street,<br />Choolaimedu, Chennai - 600094</address><a className="location-link" href="https://www.google.com/maps/search/?api=1&query=No.%2026%2F30%2C%20Om%20Sakthi%20Nilayam%2C%20South%20Gangai%20Amman%20Koil%201st%20Street%2C%20Choolaimedu%2C%20Chennai%20-%20600094" target="_blank" rel="noreferrer">Get directions <span>↗</span></a></div>
+        <div className="location-copy reveal" data-reveal><p className="location-eyebrow"><span aria-hidden="true">●</span> Chennai office</p><h2 id="location-heading">Visit us when<br />the numbers need<br /><em>attention.</em></h2><address>Jai K &amp; Associates<br />No. 26/30, Om Sakthi Nilayam,<br />South Gangai Amman Koil 1st Street,<br />Choolaimedu, Chennai - 600094</address><a className="location-link" href="https://www.google.com/maps/search/?api=1&query=No.%2026%2F30%2C%20Om%20Sakthi%20Nilayam%2C%20South%20Gangai%20Amman%20Koil%201st%20Street%2C%20Choolaimedu%2C%20Chennai%20-%20600094" target="_blank" rel="noreferrer">Get directions <ArrowIcon /></a></div>
         <div className="map-frame reveal reveal-delay-1" data-reveal><iframe title="Jai K & Associates, Choolaimedu" src="https://www.google.com/maps?q=No.%2026%2F30%2C%20Om%20Sakthi%20Nilayam%2C%20South%20Gangai%20Amman%20Koil%201st%20Street%2C%20Choolaimedu%2C%20Chennai%20-%20600094&output=embed" loading="lazy" referrerPolicy="no-referrer-when-downgrade" /></div>
       </section>
     </main>
